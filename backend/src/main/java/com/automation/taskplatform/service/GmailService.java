@@ -32,9 +32,11 @@ public class GmailService {
     private static final Logger log = LoggerFactory.getLogger(GmailService.class);
 
     private final GoogleOAuthService googleOAuthService;
+    private final AiSummaryService aiSummaryService;
 
-    public GmailService(GoogleOAuthService googleOAuthService) {
+    public GmailService(GoogleOAuthService googleOAuthService, AiSummaryService aiSummaryService) {
         this.googleOAuthService = googleOAuthService;
+        this.aiSummaryService = aiSummaryService;
     }
 
     private Gmail getGmailService(User user) throws IOException {
@@ -86,6 +88,17 @@ public class GmailService {
                 }
             }
             summary.setSnippet(message.getSnippet());
+
+            // Generate AI summary if enabled
+            if (aiSummaryService.isEnabled()) {
+                String aiSummary = aiSummaryService.summarizeEmail(
+                    summary.getFrom(),
+                    summary.getSubject(),
+                    summary.getSnippet()
+                );
+                summary.setAiSummary(aiSummary);
+            }
+
             summaries.add(summary);
         }
 
@@ -111,7 +124,15 @@ public class GmailService {
                 html.append("<div style='background: #f9fafb; padding: 15px; border-radius: 8px; margin-bottom: 10px;'>");
                 html.append("<p style='margin: 0 0 5px 0;'><strong>From:</strong> ").append(escapeHtml(email.getFrom())).append("</p>");
                 html.append("<p style='margin: 0 0 5px 0;'><strong>Subject:</strong> ").append(escapeHtml(email.getSubject())).append("</p>");
-                html.append("<p style='margin: 0; color: #666; font-size: 14px;'>").append(escapeHtml(email.getSnippet())).append("</p>");
+
+                // Show AI summary if available, otherwise show snippet
+                if (email.getAiSummary() != null && !email.getAiSummary().isEmpty()) {
+                    html.append("<p style='margin: 0; color: #4F46E5; font-size: 14px;'>")
+                        .append("💡 ").append(escapeHtml(email.getAiSummary())).append("</p>");
+                } else {
+                    html.append("<p style='margin: 0; color: #666; font-size: 14px;'>")
+                        .append(escapeHtml(email.getSnippet())).append("</p>");
+                }
                 html.append("</div>");
             }
         }
@@ -162,6 +183,7 @@ public class GmailService {
         private String subject;
         private String date;
         private String snippet;
+        private String aiSummary;
 
         public String getFrom() { return from; }
         public void setFrom(String from) { this.from = from; }
@@ -171,5 +193,7 @@ public class GmailService {
         public void setDate(String date) { this.date = date; }
         public String getSnippet() { return snippet; }
         public void setSnippet(String snippet) { this.snippet = snippet; }
+        public String getAiSummary() { return aiSummary; }
+        public void setAiSummary(String aiSummary) { this.aiSummary = aiSummary; }
     }
 }
