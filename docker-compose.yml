@@ -1,0 +1,27 @@
+services:
+  backend:
+    build: ./backend
+    container_name: taskautomation-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      TZ: America/New_York
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/taskautomation
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME:-postgres}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-postgres}
+      JWT_SECRET: ${JWT_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI:-http://localhost:8080/api/auth/google/callback}
+
+  frontend:
+    build: ./frontend
+    container_name: taskautomation-frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
