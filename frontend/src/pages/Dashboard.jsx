@@ -245,33 +245,33 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-amber-50">
       {/* Navbar */}
-      <nav className="bg-gray-800 border-b border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="bg-white border-b border-amber-100 shadow-sm">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-10 h-10 bg-teal-600 rounded-xl flex items-center justify-center shadow-sm">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <span className="text-xl font-bold text-white">TaskFlow</span>
+              <span className="text-xl font-bold text-stone-800">TaskFlow</span>
             </div>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center">
+                  <span className="text-teal-700 text-sm font-semibold">
                     {user.firstName?.[0]}{user.lastName?.[0]}
                   </span>
                 </div>
-                <span className="text-gray-300">{user.firstName} {user.lastName}</span>
+                <span className="text-stone-600 text-sm font-medium">{user.firstName}</span>
               </div>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
+                className="px-3 py-1.5 text-stone-500 hover:text-stone-700 hover:bg-stone-100 rounded-lg text-sm transition"
               >
-                Logout
+                Log out
               </button>
             </div>
           </div>
@@ -279,38 +279,38 @@ function Dashboard() {
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         {/* Gmail Connection Card */}
-        <div className={`mb-8 p-6 rounded-2xl border ${gmailConnected ? 'bg-green-900/20 border-green-700' : 'bg-yellow-900/20 border-yellow-700'}`}>
+        <div className={`mb-8 p-5 rounded-2xl border-2 ${gmailConnected ? 'bg-teal-50 border-teal-200' : 'bg-orange-50 border-orange-200'}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${gmailConnected ? 'bg-green-600/20' : 'bg-yellow-600/20'}`}>
-                <svg className={`w-6 h-6 ${gmailConnected ? 'text-green-400' : 'text-yellow-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${gmailConnected ? 'bg-teal-100' : 'bg-orange-100'}`}>
+                <svg className={`w-6 h-6 ${gmailConnected ? 'text-teal-600' : 'text-orange-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-white">
-                  {gmailConnected ? 'Gmail Connected' : 'Connect Gmail'}
+                <h3 className={`font-semibold ${gmailConnected ? 'text-teal-800' : 'text-orange-800'}`}>
+                  {gmailConnected ? 'Gmail Connected' : 'Connect your Gmail'}
                 </h3>
-                <p className="text-gray-400 text-sm">
+                <p className={`text-sm ${gmailConnected ? 'text-teal-600' : 'text-orange-600'}`}>
                   {gmailConnected
-                    ? 'Your Gmail account is connected. Workflows can read and send emails.'
-                    : 'Connect your Gmail to enable email recap workflows.'}
+                    ? 'Ready to send email recaps!'
+                    : 'Required for email recap workflows'}
                 </p>
               </div>
             </div>
             {gmailConnected ? (
               <button
                 onClick={handleDisconnectGmail}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition"
+                className="px-4 py-2 bg-white border border-teal-300 hover:bg-teal-50 text-teal-700 rounded-xl text-sm font-medium transition"
               >
                 Disconnect
               </button>
             ) : (
               <button
                 onClick={handleConnectGmail}
-                className="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-medium rounded-xl transition flex items-center gap-2"
+                className="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white text-sm font-semibold rounded-xl transition flex items-center gap-2 shadow-sm"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
@@ -322,57 +322,30 @@ function Dashboard() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-indigo-600/20 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-gray-400 text-sm">Total Workflows</p>
-                <p className="text-2xl font-bold text-white">{workflows.length}</p>
-              </div>
-            </div>
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="bg-white rounded-2xl p-5 border border-stone-100 shadow-sm">
+            <p className="text-stone-400 text-sm font-medium">Total</p>
+            <p className="text-3xl font-bold text-stone-800 mt-1">{workflows.length}</p>
           </div>
-          <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-green-600/20 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-gray-400 text-sm">Active</p>
-                <p className="text-2xl font-bold text-white">{workflows.filter(w => w.active).length}</p>
-              </div>
-            </div>
+          <div className="bg-white rounded-2xl p-5 border border-stone-100 shadow-sm">
+            <p className="text-stone-400 text-sm font-medium">Active</p>
+            <p className="text-3xl font-bold text-teal-600 mt-1">{workflows.filter(w => w.active).length}</p>
           </div>
-          <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-purple-600/20 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-gray-400 text-sm">Email Recaps</p>
-                <p className="text-2xl font-bold text-white">{workflows.filter(w => w.actionType === 'EMAIL_RECAP').length}</p>
-              </div>
-            </div>
+          <div className="bg-white rounded-2xl p-5 border border-stone-100 shadow-sm">
+            <p className="text-stone-400 text-sm font-medium">Recaps</p>
+            <p className="text-3xl font-bold text-stone-800 mt-1">{workflows.filter(w => w.actionType === 'EMAIL_RECAP').length}</p>
           </div>
         </div>
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-5">
           <div>
-            <h1 className="text-2xl font-bold text-white">My Workflows</h1>
-            <p className="text-gray-400 mt-1">Automate your email digests and notifications</p>
+            <h1 className="text-2xl font-bold text-stone-800">My Workflows</h1>
+            <p className="text-stone-500 mt-1">Automate your email digests</p>
           </div>
           <button
             onClick={() => { setShowForm(true); setEditingId(null); resetFormData(); }}
-            className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition flex items-center gap-2"
+            className="px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl transition flex items-center gap-2 shadow-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -384,60 +357,54 @@ function Dashboard() {
         {/* Workflow List */}
         {loading ? (
           <div className="flex items-center justify-center py-20">
-            <svg className="animate-spin h-8 w-8 text-indigo-500" viewBox="0 0 24 24">
+            <svg className="animate-spin h-8 w-8 text-teal-500" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
             </svg>
           </div>
         ) : workflows.length === 0 ? (
-          <div className="bg-gray-800 rounded-2xl border border-gray-700 p-12 text-center">
-            <div className="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-white rounded-2xl border border-stone-100 p-12 text-center shadow-sm">
+            <div className="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-white mb-2">No workflows yet</h3>
-            <p className="text-gray-400 mb-6">Create your first workflow to start automating your email recaps</p>
+            <h3 className="text-xl font-semibold text-stone-800 mb-2">No workflows yet</h3>
+            <p className="text-stone-500 mb-6">Create your first workflow to start getting email summaries</p>
             <button
               onClick={() => setShowForm(true)}
-              className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition"
+              className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl transition shadow-sm"
             >
-              Create Workflow
+              Create your first workflow
             </button>
           </div>
         ) : (
-          <div className="grid gap-4">
+          <div className="space-y-4">
             {workflows.map((workflow) => (
-              <div key={workflow.id} className="bg-gray-800 rounded-2xl border border-gray-700 p-6 hover:border-gray-600 transition">
+              <div key={workflow.id} className="bg-white rounded-2xl border border-stone-100 p-5 hover:shadow-md transition shadow-sm">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${workflow.active ? 'bg-indigo-600/20' : 'bg-gray-700'}`}>
-                      <svg className={`w-6 h-6 ${workflow.active ? 'text-indigo-400' : 'text-gray-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${workflow.active ? 'bg-teal-100' : 'bg-stone-100'}`}>
+                      <svg className={`w-6 h-6 ${workflow.active ? 'text-teal-600' : 'text-stone-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-white">{workflow.name}</h3>
-                      <div className="flex items-center gap-3 mt-1 flex-wrap">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${workflow.actionType === 'EMAIL_RECAP' ? 'bg-purple-500/20 text-purple-400' : 'bg-blue-500/20 text-blue-400'}`}>
-                          {workflow.actionType === 'EMAIL_RECAP' ? 'Email Recap' : 'Reminder'}
-                        </span>
-                        <span className="text-gray-400 text-sm flex items-center gap-1">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
+                      <h3 className="font-semibold text-stone-800 text-lg">{workflow.name}</h3>
+                      <div className="flex items-center gap-2 mt-1 flex-wrap">
+                        <span className="text-stone-500 text-sm">
                           {workflow.triggerType === 'SCHEDULE' ? (() => {
                             const { time, frequency } = parseCronExpression(workflow.cronExpression);
                             const freqLabels = { daily: 'Daily', weekdays: 'Weekdays', weekly: 'Weekly' };
                             return `${freqLabels[frequency] || 'Daily'} at ${time}`;
-                          })() : 'Manual'}
+                          })() : 'Manual only'}
                         </span>
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${workflow.active ? 'bg-green-500/20 text-green-400' : 'bg-gray-700 text-gray-400'}`}>
-                          {workflow.active ? 'Active' : 'Inactive'}
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${workflow.active ? 'bg-teal-100 text-teal-700' : 'bg-stone-100 text-stone-500'}`}>
+                          {workflow.active ? 'Active' : 'Paused'}
                         </span>
                         {workflow.lastRunAt && (
-                          <span className="text-gray-500 text-xs">
-                            Last run: {new Date(workflow.lastRunAt).toLocaleString()}
+                          <span className="text-stone-400 text-sm">
+                            Last run {new Date(workflow.lastRunAt).toLocaleDateString()}
                           </span>
                         )}
                       </div>
@@ -447,7 +414,7 @@ function Dashboard() {
                     <button
                       onClick={() => handleRun(workflow.id)}
                       disabled={runningWorkflow === workflow.id}
-                      className="px-4 py-2 bg-green-600 hover:bg-green-500 disabled:bg-green-600/50 text-white text-sm font-medium rounded-lg transition flex items-center gap-2"
+                      className="px-4 py-2 bg-teal-600 hover:bg-teal-700 disabled:bg-teal-400 text-white text-sm font-semibold rounded-xl transition flex items-center gap-2 shadow-sm"
                     >
                       {runningWorkflow === workflow.id ? (
                         <>
@@ -461,15 +428,14 @@ function Dashboard() {
                         <>
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                          Run Now
+                          Run
                         </>
                       )}
                     </button>
                     <button
                       onClick={() => handleEdit(workflow)}
-                      className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
+                      className="p-2 text-stone-400 hover:text-teal-600 hover:bg-teal-50 rounded-xl transition"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -477,7 +443,7 @@ function Dashboard() {
                     </button>
                     <button
                       onClick={() => handleDelete(workflow.id)}
-                      className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition"
+                      className="p-2 text-stone-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -493,53 +459,54 @@ function Dashboard() {
 
       {/* Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-gray-800 rounded-2xl p-8 w-full max-w-lg border border-gray-700 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-white mb-6">
-              {editingId ? 'Edit Workflow' : 'Create Workflow'}
+        <div className="fixed inset-0 bg-stone-900/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl p-7 w-full max-w-md shadow-xl max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl font-bold text-stone-800 mb-1">
+              {editingId ? 'Edit Workflow' : 'New Workflow'}
             </h2>
+            <p className="text-stone-500 text-sm mb-6">Set up your automated email recap</p>
+
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-gray-300 text-sm font-medium mb-2">Workflow Name</label>
+                <label className="block text-stone-700 text-sm font-medium mb-1.5">Name</label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                  className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition"
                   placeholder="Morning Email Digest"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-gray-300 text-sm font-medium mb-2">Action Type</label>
+                <label className="block text-stone-700 text-sm font-medium mb-1.5">What should it do?</label>
                 <select
                   value={formData.actionType}
                   onChange={(e) => setFormData({ ...formData, actionType: e.target.value })}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                  className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition"
                 >
-                  <option value="EMAIL_RECAP">Email Recap</option>
-                  <option value="SEND_EMAIL">Send Reminder Email</option>
+                  <option value="EMAIL_RECAP">Send me an email recap</option>
+                  <option value="SEND_EMAIL">Send a reminder email</option>
                 </select>
               </div>
 
               {/* EMAIL_RECAP specific options */}
               {formData.actionType === 'EMAIL_RECAP' && (
                 <div>
-                  <label className="block text-gray-300 text-sm font-medium mb-2">Recap Timeframe</label>
+                  <label className="block text-stone-700 text-sm font-medium mb-1.5">Summarize emails from</label>
                   <select
                     value={formData.hoursBack}
                     onChange={(e) => setFormData({ ...formData, hoursBack: Number(e.target.value) })}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                    className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition"
                   >
                     <option value={6}>Last 6 hours</option>
                     <option value={12}>Last 12 hours</option>
                     <option value={18}>Last 18 hours</option>
                     <option value={24}>Last 24 hours</option>
-                    <option value={48}>Last 48 hours</option>
-                    <option value={72}>Last 72 hours</option>
+                    <option value={48}>Last 2 days</option>
+                    <option value={72}>Last 3 days</option>
                   </select>
-                  <p className="text-gray-500 text-xs mt-1">Summarize emails received in this time window</p>
                 </div>
               )}
 
@@ -547,34 +514,34 @@ function Dashboard() {
               {formData.actionType === 'SEND_EMAIL' && (
                 <>
                   <div>
-                    <label className="block text-gray-300 text-sm font-medium mb-2">Send To</label>
+                    <label className="block text-stone-700 text-sm font-medium mb-1.5">Send To</label>
                     <input
                       type="email"
                       value={formData.emailTo}
                       onChange={(e) => setFormData({ ...formData, emailTo: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                      className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition"
                       placeholder="recipient@example.com"
                       required
                     />
-                    <p className="text-gray-500 text-xs mt-1">Leave empty to send to yourself</p>
+                    <p className="text-stone-400 text-xs mt-1.5">Leave empty to send to yourself</p>
                   </div>
                   <div>
-                    <label className="block text-gray-300 text-sm font-medium mb-2">Subject</label>
+                    <label className="block text-stone-700 text-sm font-medium mb-1.5">Subject</label>
                     <input
                       type="text"
                       value={formData.emailSubject}
                       onChange={(e) => setFormData({ ...formData, emailSubject: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                      className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition"
                       placeholder="Daily Reminder"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-300 text-sm font-medium mb-2">Message</label>
+                    <label className="block text-stone-700 text-sm font-medium mb-1.5">Message</label>
                     <textarea
                       value={formData.emailBody}
                       onChange={(e) => setFormData({ ...formData, emailBody: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none"
+                      className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition resize-none"
                       placeholder="Don't forget to..."
                       rows={4}
                       required
@@ -584,39 +551,39 @@ function Dashboard() {
               )}
 
               <div>
-                <label className="block text-gray-300 text-sm font-medium mb-2">Trigger Type</label>
+                <label className="block text-stone-700 text-sm font-medium mb-1.5">When should it run?</label>
                 <select
                   value={formData.triggerType}
                   onChange={(e) => setFormData({ ...formData, triggerType: e.target.value })}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                  className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition"
                 >
-                  <option value="SCHEDULE">Scheduled</option>
-                  <option value="MANUAL">Manual Only</option>
+                  <option value="SCHEDULE">On a schedule</option>
+                  <option value="MANUAL">Only when I click Run</option>
                 </select>
               </div>
 
               {/* Schedule options */}
               {formData.triggerType === 'SCHEDULE' && (
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-gray-300 text-sm font-medium mb-2">Time</label>
+                    <label className="block text-stone-700 text-sm font-medium mb-1.5">Time</label>
                     <input
                       type="time"
                       value={formData.scheduleTime}
                       onChange={(e) => setFormData({ ...formData, scheduleTime: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                      className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-300 text-sm font-medium mb-2">Frequency</label>
+                    <label className="block text-stone-700 text-sm font-medium mb-1.5">Repeat</label>
                     <select
                       value={formData.scheduleFrequency}
                       onChange={(e) => setFormData({ ...formData, scheduleFrequency: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                      className="w-full px-4 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition"
                     >
-                      <option value="daily">Every Day</option>
-                      <option value="weekdays">Weekdays Only</option>
-                      <option value="weekly">Once a Week (Monday)</option>
+                      <option value="daily">Every day</option>
+                      <option value="weekdays">Weekdays only</option>
+                      <option value="weekly">Once a week</option>
                     </select>
                   </div>
                 </div>
@@ -626,15 +593,15 @@ function Dashboard() {
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="flex-1 px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-xl transition"
+                  className="flex-1 px-4 py-3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold rounded-xl transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition"
+                  className="flex-1 px-4 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl transition shadow-sm"
                 >
-                  {editingId ? 'Update' : 'Create'}
+                  {editingId ? 'Save changes' : 'Create workflow'}
                 </button>
               </div>
             </form>
